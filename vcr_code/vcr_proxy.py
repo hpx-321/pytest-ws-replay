@@ -102,7 +102,7 @@ class Recorder:
         original_recv = ws.recv
         original_send = ws.send
 
-        current_interaction = [None]
+        current_interaction = None
 
         async def hooked_send(message):
             await original_send(message)
@@ -121,15 +121,15 @@ class Recorder:
                 return
 
             # Create new interaction for sent message
-            current_interaction[0] = None
-            self._create_interaction(target_url, message, None)
-
+            current_interaction = self._create_interaction(
+                target_url, message, None
+            )
         async def hooked_recv():
             """Handle receiving messages."""
             chunk = await original_recv()
 
-            if current_interaction[0] is not None:
-                current_interaction[0]['response'].append(chunk)
+            if current_interaction is not None:
+                current_interaction["response"].append(chunk)
             else:
                 self._create_interaction(target_url, None, chunk)
 
@@ -158,11 +158,7 @@ class Recorder:
         """Save recorded data to storage."""
         if self.all_recorded_data:
             print("[Recorder] 录制完成，准备保存数据")
-            cassette_data: CassetteData = {
-                "url": query,
-                "interactions": self.all_recorded_data.get(query, [])
-            }
-            storage.save(query, cassette_data)
+            storage.save(query, self.all_recorded_data)
 
         self.active_connections.clear()
 

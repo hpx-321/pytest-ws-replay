@@ -77,7 +77,7 @@ class CassetteStorage:
             print(f"[CassetteStorage] 读取数据出现错误，错误类型: {e}")
             raise
 
-    def save(self, query: str, data: CassetteData):
+    def save(self, query: str, data):
         """Save cassette data to file."""
         path = self.get_save_path(query)
         try:
