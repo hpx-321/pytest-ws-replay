@@ -22,8 +22,6 @@ class Interaction(TypedDict):
     type: str  # 'interaction'
     request: Optional[str]  # Sent message
     response: List[str]  # Received responses
-    timestamp: float  # When the interaction occurred
-    metadata: Dict[str, Any]  # Additional metadata
 
 
 class CassetteData(TypedDict):

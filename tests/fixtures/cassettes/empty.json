@@ -1,4 +1,3 @@
 {
-  "url": "ws://example.com/test",
-  "interactions": []
+  "ws://example.com/chat": []
 }

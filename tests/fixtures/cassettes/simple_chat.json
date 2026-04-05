@@ -1,15 +1,14 @@
 {
-  "url": "ws://example.com/test",
-  "interactions": [
+  "ws://example.com/chat": [
     {
       "type": "interaction",
-      "request": "Hello",
-      "response": ["Hello back"]
+      "request": "hello",
+      "response": ["chat response"]
     },
     {
       "type": "interaction",
-      "request": null,
-      "response": ["Server message"]
+      "request": "chat message",
+      "response": ["chat response"]
     }
   ]
 }

@@ -47,6 +47,7 @@ class VCRProxy:
         self.player = Player(self)
         self.player.load_playback_data(data)
         self.recorder = None
+        self.matcher = Matcher(self)
         print("[VCRProxy] 切换到回放模式")
 
     async def intercept(self, *args, **kwargs):

@@ -11,7 +11,7 @@ class FakeWebSocket:
         self.parent_vcr = parent_vcr
         self.target_url = target_url
         self.closed = False
-        self.curent_response = []
+        self.current_response = []
 
         # WebSocket-like attributes
         self.id = f"fake_ws_{id(self)}"
