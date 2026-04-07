@@ -13,20 +13,24 @@ class Matcher:
         if target_url in playback_data:
             return target_url
 
-        try:
-            if '/' not in target_url:
-                return None
+        if self.enable_fuzzy_match:
 
-            target_path = self._extract_path(target_url)
+            try:
+                if '/' not in target_url:
+                    return None
 
-            for recorded_url in playback_data.keys():
-                if '/' in recorded_url:
-                    recorded_path = self._extract_path(recorded_url)
-                    if target_path == recorded_path:
-                        return recorded_url
+                target_path = self._extract_path(target_url)
 
-        except Exception as e:
-            print(f"[Matcher] 模糊匹配时出现错误: {e}")
+                for recorded_url in playback_data.keys():
+                    if '/' in recorded_url:
+                        recorded_path = self._extract_path(recorded_url)
+                        if target_path == recorded_path:
+                            return recorded_url
+
+            except Exception as e:
+                print(f"[Matcher] 模糊匹配时出现错误: {e}")
+        else:
+            return None
 
         return None
 

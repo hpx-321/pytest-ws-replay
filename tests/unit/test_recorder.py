@@ -31,12 +31,10 @@ class TestRecorder:
             response="World"
         )
 
-        assert interaction["type"] == "interaction"
         assert interaction["request"] == "Hello"
         assert interaction["response"] == ["World"]
         assert recorder.all_recorded_data == {
             'ws://example.com/test' :[{
-            "type": "interaction",
             "request": 'Hello',
             "response": ["World"]
         }]
@@ -57,7 +55,6 @@ class TestRecorder:
         assert interaction["response"] == ["Server push"]
         assert recorder.all_recorded_data == {
             'ws://example.com/test' :[{
-            "type": "interaction",
             "request": None,
             "response": ["Server push"]
         }]
