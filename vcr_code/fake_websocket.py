@@ -31,11 +31,11 @@ class FakeWebSocket:
             print(f"[FakeWebSocket] 回放数据不足，当前请求url为 {self.target_url}")
             self.current_response =[]
 
-    async def recv(self) -> str:
+    async def recv(self) -> Optional[str]:
 
         if not self.current_response:
             print("[FakeWebSocket] 没有回放数据")
-            return 
+            return None
 
         chunk = self.current_response.pop(0)
         if isinstance(chunk, dict):
@@ -54,7 +54,7 @@ class FakeWebSocket:
 
     async def __anext__(self):
         """Support async for loop."""
-        if self.closed or self.current_interaction_index >= len(self.interactions):
+        if self.closed:
             raise StopAsyncIteration
 
         try:

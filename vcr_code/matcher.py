@@ -13,13 +13,6 @@ class Matcher:
         if target_url in playback_data:
             return target_url
 
-        if self.enable_fuzzy_match:
-            return self._fuzzy_match(target_url, playback_data)
-
-        return None
-
-    def _fuzzy_match(self, target_url: str, playback_data: Dict[str, List]) -> Optional[str]:
-        """Perform fuzzy matching based on URL paths."""
         try:
             if '/' not in target_url:
                 return None
@@ -36,6 +29,7 @@ class Matcher:
             print(f"[Matcher] 模糊匹配时出现错误: {e}")
 
         return None
+
 
     def _extract_path(self, url: str) -> str:
         """Extract path from URL for matching purposes."""

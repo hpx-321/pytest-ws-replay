@@ -1,6 +1,5 @@
 from typing import TypedDict, Optional, List, Dict, Any
 from dataclasses import dataclass
-from datetime import datetime
 
 
 @dataclass
@@ -19,7 +18,6 @@ class WebsocketMessage:
 
 class Interaction(TypedDict):
     """Represents a single interaction in a WebSocket session."""
-    type: str  # 'interaction'
     request: Optional[str]  # Sent message
     response: List[str]  # Received responses
 

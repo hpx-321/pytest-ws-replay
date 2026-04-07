@@ -121,12 +121,15 @@ class Recorder:
             if is_heartbeat:
                 return
 
+            nonlocal current_interaction
+
             # Create new interaction for sent message
             current_interaction = self._create_interaction(
                 target_url, message, None
             )
         async def hooked_recv():
             """Handle receiving messages."""
+            nonlocal current_interaction
             chunk = await original_recv()
 
             if current_interaction is not None:
@@ -147,7 +150,6 @@ class Recorder:
             self.all_recorded_data[target_url] = []
 
         interaction: Interaction = {
-            "type": "interaction",
             "request": request,
             "response": [response] if response else []
         }
